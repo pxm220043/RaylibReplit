@@ -1,60 +1,51 @@
 #include "raylib.h"
 
-int main() {
+//------------------------------------------------------------------------------------
+// Program main entry point
+//------------------------------------------------------------------------------------
+int main(void)
+{
     // Initialization
+    //--------------------------------------------------------------------------------------
     const int screenWidth = 500;
-    const int screenHeight = 499;
+    const int screenHeight = 500;
 
-    InitWindow(screenWidth, screenHeight, "Bouncing Ball Example");
+    InitWindow(screenWidth, screenHeight, "raylib [core] example - keyboard input");
 
-    // Ball variables
-    Vector2 ballPosition = { (float)screenWidth / 2, (float)screenHeight / 2 };
-    Vector2 ballSpeed = { 5.0f, 5.0f };
-    int ballRadius = 20;
-    Color ballColor = BLUE;
+    Vector2 ballPosition = { (float)screenWidth/2, (float)screenHeight/2 };
 
-    // Area variables
-    Rectangle playArea = { 50, 50, screenWidth - 100, screenHeight - 100 };
-    Color areaColor = RED;
-
-    SetTargetFPS(60);
+    SetTargetFPS(60);               // Set our game to run at 60 frames-per-second
+    //--------------------------------------------------------------------------------------
 
     // Main game loop
-    while (!WindowShouldClose()) {
+    while (!WindowShouldClose())    // Detect window close button or ESC key
+    {
         // Update
-        ballPosition.x += ballSpeed.x;
-        ballPosition.y += ballSpeed.y;
-
-        // Bounce off walls
-        if ((ballPosition.x + ballRadius > playArea.x + playArea.width) || (ballPosition.x - ballRadius < playArea.x)) {
-            ballSpeed.x *= -1.0f;
-        }
-        if ((ballPosition.y + ballRadius > playArea.y + playArea.height) || (ballPosition.y - ballRadius < playArea.y)) {
-            ballSpeed.y *= -1.0f;
-        }
+        //----------------------------------------------------------------------------------
+        if (IsKeyDown(KEY_D)) ballPosition.x += 2.0f;
+        if (IsKeyDown(KEY_A)) ballPosition.x -= 2.0f;
+        if (IsKeyDown(KEY_W)) ballPosition.y -= 2.0f;
+        if (IsKeyDown(KEY_S)) ballPosition.y += 2.0f;
+        //----------------------------------------------------------------------------------
 
         // Draw
+        //----------------------------------------------------------------------------------
         BeginDrawing();
-        ClearBackground(WHITE);
 
-        // Draw play area
-        DrawRectangleLinesEx(playArea, 2, areaColor);
+            ClearBackground(RAYWHITE);
 
-        // Draw ball
-          DrawCircleV(ballPosition, ballRadius, ballColor);
+            DrawText("move the ball with arrow keys", 10, 10, 20, DARKGRAY);
 
-
-        // Draw text
-        DrawText("This is a bouncing ball", screenWidth / 2 - MeasureText("This is a bouncing ball", 20) / 2, 10, 20, DARKGRAY);
+            DrawCircleV(ballPosition, 50, MAROON);
 
         EndDrawing();
-
-      
-        
+        //----------------------------------------------------------------------------------
     }
 
-    // Cleanup
-    CloseWindow();
+    // De-Initialization
+    //--------------------------------------------------------------------------------------
+    CloseWindow();        // Close window and OpenGL context
+    //--------------------------------------------------------------------------------------
 
     return 0;
 }
