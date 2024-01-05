@@ -2,8 +2,8 @@
 
 int main() {
     // Initialization
-    const int screenWidth = 800;
-    const int screenHeight = 600;
+    const int screenWidth = 500;
+    const int screenHeight = 499;
 
     InitWindow(screenWidth, screenHeight, "Bouncing Ball Example");
 
@@ -11,11 +11,11 @@ int main() {
     Vector2 ballPosition = { (float)screenWidth / 2, (float)screenHeight / 2 };
     Vector2 ballSpeed = { 5.0f, 5.0f };
     int ballRadius = 20;
-    Color ballColor = RED;
+    Color ballColor = BLUE;
 
     // Area variables
     Rectangle playArea = { 50, 50, screenWidth - 100, screenHeight - 100 };
-    Color areaColor = DARKGRAY;
+    Color areaColor = RED;
 
     SetTargetFPS(60);
 
@@ -41,9 +41,16 @@ int main() {
         DrawRectangleLinesEx(playArea, 2, areaColor);
 
         // Draw ball
-        DrawCircleV(ballPosition, ballRadius, ballColor);
+          DrawCircleV(ballPosition, ballRadius, ballColor);
+
+
+        // Draw text
+        DrawText("This is a bouncing ball", screenWidth / 2 - MeasureText("This is a bouncing ball", 20) / 2, 10, 20, DARKGRAY);
 
         EndDrawing();
+
+      
+        
     }
 
     // Cleanup
