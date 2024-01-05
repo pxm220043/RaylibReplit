@@ -1,0 +1,20 @@
+#!/bin/bash
+
+PROGRAM_NAME="my_program"
+SOURCE_FILE="main.cpp"
+
+# Check if the program exists
+if [ -f "$PROGRAM_NAME" ]; then
+    echo "Removing previous executable: $PROGRAM_NAME"
+    rm "$PROGRAM_NAME"
+fi
+
+echo "Compiling $SOURCE_FILE..."
+g++ -o "$PROGRAM_NAME" "$SOURCE_FILE" -lraylib -ldl -lpthread -lm -lX11
+
+if [ $? -eq 0 ]; then
+    echo "Compilation successful. Running $PROGRAM_NAME in the background..."
+    ./"$PROGRAM_NAME" &
+else
+    echo "Compilation failed."
+fi
