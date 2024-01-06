@@ -1,5 +1,5 @@
 #include "raylib.h"
-#include <cmath> 
+#include <cmath>
 
 int player_score = 0;
 int cpu_score = 0;
@@ -34,14 +34,14 @@ public:
     }
   }
 
-void ResetBall() {
+  void ResetBall() {
     x = GetScreenWidth() / 2;
     y = GetScreenHeight() / 2;
 
     int speed_choices[2] = {1, -1};
     speed_x = speed_choices[GetRandomValue(0, 1)] * std::abs(speed_x);
     speed_y = speed_choices[GetRandomValue(0, 1)] * std::abs(speed_y);
-}
+  }
 };
 
 class Paddle {
@@ -117,7 +117,7 @@ int main() {
   player.y = screenHeight / 2 - player.height / 2;
   player.speed = 6;
 
-  cpu.height = 120;
+  cpu.height = 100;
   cpu.width = 25;
   cpu.x = 10;
   cpu.y = screenHeight / 2 - cpu.height / 2;
